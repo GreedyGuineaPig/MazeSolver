@@ -26,7 +26,12 @@ using namespace mazelab;
 // implement your MazeSolver functions here...
 MazeSolver::MazeSolver(std::istream& in)
 {
-    maze_ptr = new maze(in);
+    try{
+        maze_ptr = new maze(in);
+    }catch(domain_error& e){
+        cout << e.what() << endl;
+        throw domain_error("MazeSolver constructor error");
+    }
     worklist.push_back(maze_ptr -> getStart());
 }
 
